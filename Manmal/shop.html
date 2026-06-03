@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop All Kits — The Manmal Club</title>
+<meta name="description" content="Browse premium DIY craft kits — candle-making, resin, painting, embroidery, journaling, clay and seasonal editions. Shipped across Pakistan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/manmal.css">
+</head>
+<body>
+
+<div class="announce">Free delivery across Pakistan on orders over Rs. 5,000 · Now shipping nationwide</div>
+
+<header class="site-head">
+  <nav class="nav wrap" aria-label="Primary">
+    <button class="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="shop.html" class="nav-link active">Shop</a>
+      <a href="shop.html#categories" class="nav-link">Categories</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="index.html" class="brand" aria-label="The Manmal Club home">
+      <span class="the">The</span><span class="nm">Manmal</span><span class="club">Club</span>
+    </a>
+    <div class="nav-links right">
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="nav-icons">
+        <button class="icon-btn search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn" data-open-cart aria-label="Open bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-nav">
+  <button class="mclose" aria-label="Close menu">&times;</button>
+  <ul>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="shop.html#categories">Categories</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<main>
+  <!-- shop header -->
+  <section class="shop-hero" id="categories">
+    <div class="wrap center">
+      <span class="eyebrow reveal">The collection</span>
+      <h1 class="h1 reveal" id="shopTitle">All Kits</h1>
+      <p class="lede muted reveal" id="shopSub" style="max-width:48ch;margin:16px auto 0">Everything you need to make, in one box. Choose a craft below.</p>
+    </div>
+  </section>
+
+  <!-- filter bar -->
+  <div class="filter-bar">
+    <div class="wrap">
+      <div class="filters" id="filters"></div>
+    </div>
+  </div>
+
+  <!-- product grid -->
+  <section class="section" style="padding-top:clamp(36px,5vw,60px)">
+    <div class="wrap">
+      <p class="result-count muted" id="resultCount"></p>
+      <div class="grid-4" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- reassurance strip -->
+  <section class="reassure">
+    <div class="wrap reassure-grid">
+      <div class="reassure-item reveal"><h4>Curated materials</h4><p>Quality supplies, no filler — chosen for the result.</p></div>
+      <div class="reassure-item reveal"><h4>Beginner-friendly</h4><p>Clear, illustrated guides in every box.</p></div>
+      <div class="reassure-item reveal"><h4>Gift-ready</h4><p>Beautifully packaged, ready to give.</p></div>
+      <div class="reassure-item reveal"><h4>Nationwide delivery</h4><p>Shipped anywhere in Pakistan.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="the">The</span><span class="nm">Manmal</span><span class="club">Club</span>
+        <p>Premium DIY kits for grown-ups who want to slow down and make something. Curated and shipped from Pakistan.</p>
+        <form class="news" data-newsletter style="margin-top:22px">
+          <input type="email" placeholder="Join the newsletter" required aria-label="Email address">
+          <button type="submit">Join</button>
+        </form>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <a href="shop.html?cat=Candle%20Making">Candle Making</a>
+        <a href="shop.html?cat=Resin%20Art">Resin Art</a>
+        <a href="shop.html?cat=Painting">Painting</a>
+        <a href="shop.html?cat=Embroidery">Embroidery</a>
+        <a href="shop.html">All kits</a>
+      </div>
+      <div class="foot-col">
+        <h4>The Club</h4>
+        <a href="about.html">Our story</a>
+        <a href="about.html#values">What we believe</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h4>Help</h4>
+        <a href="contact.html">Shipping &amp; delivery</a>
+        <a href="contact.html">Returns</a>
+        <a href="contact.html">Gift orders</a>
+        <a href="contact.html#faq">Bulk &amp; workshops</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 The Manmal Club · Karachi, Pakistan</span>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var P=window.MANMAL_PRODUCTS||[];
+  var cats=["All","Candle Making","Resin Art","Painting","Embroidery","Journaling","Clay Art","Seasonal"];
+  var params=new URLSearchParams(location.search);
+  var active=params.get("cat")||"All";
+  if(cats.indexOf(active)===-1)active="All";
+
+  var subtitles={
+    "All":"Everything you need to make, in one box. Choose a craft below.",
+    "Candle Making":"Pour, scent and set your own candles — calm, fragrant, satisfying.",
+    "Resin Art":"Cast trays, coasters and keepsakes with glassy, jewel-like finishes.",
+    "Painting":"Loose, expressive canvases — colour chosen to calm, not to fuss.",
+    "Embroidery":"Slow, rhythmic stitching on natural linen and cotton.",
+    "Journaling":"Tools and rituals for slow mornings and considered pages.",
+    "Clay Art":"Shape, dry and glaze little objects to keep or gift.",
+    "Seasonal":"Limited editions, made for the time of year."
+  };
+
+  var filters=document.getElementById("filters");
+  filters.innerHTML=cats.map(function(c){
+    return '<button class="filter'+(c===active?' on':'')+'" data-cat="'+c+'">'+c+'</button>';
+  }).join("");
+
+  function apply(cat){
+    active=cat;
+    document.querySelectorAll(".filter").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-cat")===cat);});
+    var list=cat==="All"?P:P.filter(function(p){return p.cat===cat;});
+    document.getElementById("shopTitle").textContent=cat==="All"?"All Kits":cat;
+    document.getElementById("shopSub").textContent=subtitles[cat]||subtitles.All;
+    document.getElementById("resultCount").textContent=list.length+(list.length===1?" kit":" kits");
+    document.getElementById("grid").innerHTML=list.map(window.MANMAL_cardHTML).join("");
+    window.MANMAL_initReveal();
+    var url=cat==="All"?"shop.html":"shop.html?cat="+encodeURIComponent(cat);
+    history.replaceState(null,"",url);
+  }
+
+  filters.addEventListener("click",function(e){
+    var b=e.target.closest(".filter");
+    if(b)apply(b.getAttribute("data-cat"));
+  });
+
+  apply(active);
+})();
+</script>
+</body>
+</html>

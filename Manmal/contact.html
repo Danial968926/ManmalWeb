@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — The Manmal Club</title>
+<meta name="description" content="Get in touch with The Manmal Club — questions, gift orders, bulk and workshop enquiries. Based in Karachi, shipping across Pakistan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/manmal.css">
+</head>
+<body>
+
+<div class="announce">Free delivery across Pakistan on orders over Rs. 5,000 · Now shipping nationwide</div>
+
+<header class="site-head">
+  <nav class="nav wrap" aria-label="Primary">
+    <button class="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="shop.html" class="nav-link">Shop</a>
+      <a href="shop.html#categories" class="nav-link">Categories</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="index.html" class="brand" aria-label="The Manmal Club home">
+      <span class="the">The</span><span class="nm">Manmal</span><span class="club">Club</span>
+    </a>
+    <div class="nav-links right">
+      <a href="contact.html" class="nav-link active">Contact</a>
+      <div class="nav-icons">
+        <button class="icon-btn search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn" data-open-cart aria-label="Open bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-nav">
+  <button class="mclose" aria-label="Close menu">&times;</button>
+  <ul>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="shop.html#categories">Categories</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<main>
+  <section class="contact-hero">
+    <div class="wrap center">
+      <span class="eyebrow reveal">Say hello</span>
+      <h1 class="h1 reveal">Let's <span class="script">talk</span></h1>
+      <p class="lede muted reveal" style="max-width:46ch;margin:18px auto 0">Questions about a kit, a gift order, a workshop, or just want to share what you made — we'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:clamp(30px,4vw,56px)">
+    <div class="wrap contact-grid">
+      <!-- form -->
+      <div class="contact-form-wrap reveal">
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="field">
+            <label for="cname">Name</label>
+            <input id="cname" name="name" type="text" required placeholder="Your name">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="cemail">Email</label>
+              <input id="cemail" name="email" type="email" required placeholder="you@email.com">
+            </div>
+            <div class="field">
+              <label for="cphone">Phone <span class="opt">(optional)</span></label>
+              <input id="cphone" name="phone" type="tel" placeholder="03XX XXXXXXX">
+            </div>
+          </div>
+          <div class="field">
+            <label for="ctopic">What's this about?</label>
+            <select id="ctopic" name="topic">
+              <option>A question about a kit</option>
+              <option>Gift orders</option>
+              <option>Bulk &amp; corporate orders</option>
+              <option>Workshops &amp; events</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cmsg">Message</label>
+            <textarea id="cmsg" name="message" rows="5" required placeholder="Tell us a little more…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Send message</button>
+          <p class="form-note" id="formNote" hidden>Thank you — we'll be in touch within one working day.</p>
+        </form>
+      </div>
+
+      <!-- details -->
+      <aside class="contact-aside reveal">
+        <div class="contact-block">
+          <h3>Reach us directly</h3>
+          <ul class="contact-list">
+            <li><span class="cl-k">WhatsApp</span><a href="#">+92 3XX XXXXXXX</a></li>
+            <li><span class="cl-k">Email</span><a href="#">hello@manmal.co</a></li>
+            <li><span class="cl-k">Instagram</span><a href="#">@themanmalclub</a></li>
+          </ul>
+        </div>
+        <div class="contact-block">
+          <h3>Studio</h3>
+          <p class="muted">Karachi, Pakistan<br>By appointment only</p>
+        </div>
+        <div class="contact-block">
+          <h3>Hours</h3>
+          <p class="muted">Monday – Saturday<br>10:00 – 18:00 PKT</p>
+        </div>
+        <div class="contact-block">
+          <h3>Orders &amp; delivery</h3>
+          <p class="muted">Dispatched in 2–3 working days. Free delivery over Rs. 5,000, flat Rs. 250 below. Nationwide.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Good to know</span>
+        <h2 class="h2">Frequently asked</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details><summary>Are the kits suitable for complete beginners?</summary><p>Yes — most are designed for first-timers. Every box includes a clear, illustrated guide that assumes no prior experience. Kits marked "Improver" are a gentle step up once you've found your feet.</p></details>
+        <details><summary>What exactly comes in a kit?</summary><p>Everything you need to finish the project: all materials, the tools to work with them, and a step-by-step guide. The only things you'll supply are basics like water, a flat surface, and your time. Each product page lists the full contents.</p></details>
+        <details><summary>How long does delivery take?</summary><p>Orders are dispatched within 2–3 working days and delivered anywhere in Pakistan. Delivery is free on orders over Rs. 5,000, and a flat Rs. 250 below that.</p></details>
+        <details><summary>Can I order a kit as a gift?</summary><p>Absolutely — every kit arrives gift-ready. You can add a handwritten note at checkout, or message us for a gift card and we'll arrange it.</p></details>
+        <details><summary>Do you offer workshops or bulk orders?</summary><p>We do. We put together kits for events, team activities and gifting at scale, and run occasional in-person sessions. Use the form above and choose "Workshops" or "Bulk orders" and we'll send details.</p></details>
+        <details><summary>What's your returns policy?</summary><p>If a kit arrives damaged or incomplete, message us within 7 days and we'll make it right. As kits contain consumable materials, we're unable to accept returns once opened.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="the">The</span><span class="nm">Manmal</span><span class="club">Club</span>
+        <p>Premium DIY kits for grown-ups who want to slow down and make something. Curated and shipped from Pakistan.</p>
+        <form class="news" data-newsletter style="margin-top:22px">
+          <input type="email" placeholder="Join the newsletter" required aria-label="Email address">
+          <button type="submit">Join</button>
+        </form>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <a href="shop.html?cat=Candle%20Making">Candle Making</a>
+        <a href="shop.html?cat=Resin%20Art">Resin Art</a>
+        <a href="shop.html?cat=Painting">Painting</a>
+        <a href="shop.html?cat=Embroidery">Embroidery</a>
+        <a href="shop.html">All kits</a>
+      </div>
+      <div class="foot-col">
+        <h4>The Club</h4>
+        <a href="about.html">Our story</a>
+        <a href="about.html#values">What we believe</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h4>Help</h4>
+        <a href="contact.html">Shipping &amp; delivery</a>
+        <a href="contact.html">Returns</a>
+        <a href="contact.html">Gift orders</a>
+        <a href="contact.html#faq">Bulk &amp; workshops</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 The Manmal Club · Karachi, Pakistan</span>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/site.js"></script>
+<script>
+  document.getElementById("contactForm").addEventListener("submit",function(e){
+    e.preventDefault();
+    if(!this.checkValidity()){this.reportValidity();return;}
+    this.querySelector("button[type=submit]").textContent="Sent ✓";
+    document.getElementById("formNote").hidden=false;
+    window.MANMAL_toast("Message sent — thank you");
+    this.reset();
+  });
+</script>
+</body>
+</html>

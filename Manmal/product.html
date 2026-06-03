@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit — The Manmal Club</title>
+<meta name="description" content="A premium DIY kit from The Manmal Club — everything you need to make something, in one beautiful box.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/manmal.css">
+</head>
+<body>
+
+<div class="announce">Free delivery across Pakistan on orders over Rs. 5,000 · Now shipping nationwide</div>
+
+<header class="site-head">
+  <nav class="nav wrap" aria-label="Primary">
+    <button class="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="shop.html" class="nav-link">Shop</a>
+      <a href="shop.html#categories" class="nav-link">Categories</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="index.html" class="brand" aria-label="The Manmal Club home">
+      <span class="the">The</span><span class="nm">Manmal</span><span class="club">Club</span>
+    </a>
+    <div class="nav-links right">
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="nav-icons">
+        <button class="icon-btn search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <button class="icon-btn" data-open-cart aria-label="Open bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-nav">
+  <button class="mclose" aria-label="Close menu">&times;</button>
+  <ul>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="shop.html#categories">Categories</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<main id="pdp">
+  <!-- populated by JS -->
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="the">The</span><span class="nm">Manmal</span><span class="club">Club</span>
+        <p>Premium DIY kits for grown-ups who want to slow down and make something. Curated and shipped from Pakistan.</p>
+        <form class="news" data-newsletter style="margin-top:22px">
+          <input type="email" placeholder="Join the newsletter" required aria-label="Email address">
+          <button type="submit">Join</button>
+        </form>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <a href="shop.html?cat=Candle%20Making">Candle Making</a>
+        <a href="shop.html?cat=Resin%20Art">Resin Art</a>
+        <a href="shop.html?cat=Painting">Painting</a>
+        <a href="shop.html?cat=Embroidery">Embroidery</a>
+        <a href="shop.html">All kits</a>
+      </div>
+      <div class="foot-col">
+        <h4>The Club</h4>
+        <a href="about.html">Our story</a>
+        <a href="about.html#values">What we believe</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h4>Help</h4>
+        <a href="contact.html">Shipping &amp; delivery</a>
+        <a href="contact.html">Returns</a>
+        <a href="contact.html">Gift orders</a>
+        <a href="contact.html#faq">Bulk &amp; workshops</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 The Manmal Club · Karachi, Pakistan</span>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function(){
+  var rs=window.MANMAL_rs;
+  var params=new URLSearchParams(location.search);
+  var id=params.get("id");
+  var P=window.MANMAL_PRODUCTS||[];
+  var p=window.MANMAL_byId(id)||P[0];
+  document.title=p.name+" — The Manmal Club";
+
+  var includes=p.includes.map(function(x){return '<li>'+x+'</li>';}).join("");
+  var priceBlock=(p.was?'<span class="pdp-was">'+rs(p.was)+'</span>':'')+'<span class="pdp-price">'+rs(p.price)+'</span>';
+
+  // related: same-ish, exclude self, take 4
+  var related=P.filter(function(x){return x.id!==p.id;}).sort(function(a,b){
+    return (b.cat===p.cat)-(a.cat===p.cat);
+  }).slice(0,4);
+
+  document.getElementById("pdp").innerHTML=
+    '<div class="wrap pdp-crumb"><a href="shop.html">Shop</a> <span>/</span> <a href="shop.html?cat='+encodeURIComponent(p.cat)+'">'+p.cat+'</a> <span>/</span> '+p.name+'</div>'+
+    '<div class="wrap pdp-grid">'+
+      '<div class="pdp-media">'+
+        '<div class="pdp-main ph">'+(p.tag?'<span class="card-tag">'+p.tag+'</span>':'')+'<span>'+p.name+'</span></div>'+
+        '<div class="pdp-thumbs">'+
+          '<div class="ph"><span>Detail</span></div>'+
+          '<div class="ph"><span>In use</span></div>'+
+          '<div class="ph"><span>Finished</span></div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="pdp-info">'+
+        '<div class="pdp-cat">'+p.cat+'</div>'+
+        '<h1 class="pdp-name">'+p.name+'</h1>'+
+        '<div class="pdp-pricerow">'+priceBlock+'</div>'+
+        '<p class="pdp-blurb">'+p.blurb+'</p>'+
+        '<div class="pdp-meta">'+
+          '<div><span class="m-k">Makes</span><span class="m-v">'+p.makes+'</span></div>'+
+          '<div><span class="m-k">Time</span><span class="m-v">'+p.time+'</span></div>'+
+          '<div><span class="m-k">Level</span><span class="m-v">'+p.level+'</span></div>'+
+        '</div>'+
+        '<div class="pdp-buy">'+
+          '<div class="qty pdp-qty"><button data-q="dec" aria-label="Decrease">&minus;</button><span id="pdpQty">1</span><button data-q="inc" aria-label="Increase">+</button></div>'+
+          '<button class="btn btn-primary pdp-add" id="pdpAdd">Add to bag — '+rs(p.price)+'</button>'+
+        '</div>'+
+        '<div class="pdp-includes">'+
+          '<h3>What\u2019s in the box</h3>'+
+          '<ul>'+includes+'</ul>'+
+        '</div>'+
+        '<div class="pdp-notes">'+
+          '<details open><summary>Shipping &amp; delivery</summary><p>Dispatched within 2\u20133 working days. Free delivery on orders over Rs. 5,000, flat Rs. 250 below. Delivered anywhere in Pakistan.</p></details>'+
+          '<details><summary>Good to know</summary><p>Designed for adults and supervised teens. Kits contain small parts and, for resin and candle kits, materials best used in a ventilated space. A full safety note is included.</p></details>'+
+          '<details><summary>Gifting</summary><p>Every kit arrives gift-ready. Add a handwritten note at checkout, or order a gift card from our contact page.</p></details>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+    '<section class="section pdp-related"><div class="wrap">'+
+      '<div class="feature-head"><div><span class="eyebrow">Keep exploring</span><h2 class="h2">You might also like</h2></div><a href="shop.html" class="link-arrow">All kits</a></div>'+
+      '<div class="grid-4">'+related.map(window.MANMAL_cardHTML).join("")+'</div>'+
+    '</div></section>';
+
+  // qty + add
+  var qty=1;
+  var qEl=document.getElementById("pdpQty");
+  document.querySelector('[data-q="inc"]').onclick=function(){qty++;qEl.textContent=qty;};
+  document.querySelector('[data-q="dec"]').onclick=function(){if(qty>1){qty--;qEl.textContent=qty;}};
+  document.getElementById("pdpAdd").onclick=function(){window.MANMAL_add(p.id,qty);};
+
+  window.MANMAL_initReveal();
+})();
+</script>
+</body>
+</html>
