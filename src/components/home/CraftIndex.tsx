@@ -12,13 +12,13 @@ interface Row {
 }
 
 const ROWS: Row[] = [
-  { href: "/shop?cat=Candle%20Making", no: "01", name: "Candle Making", meta: "2 kits", label: "Candle — pour, scent & set" },
-  { href: "/shop?cat=Resin%20Art", no: "02", name: "Resin Art", meta: "2 kits", label: "Resin — glassy, jewel-like casts" },
-  { href: "/shop?cat=Painting", no: "03", name: "Painting", meta: "2 kits", label: "Painting — loose, expressive canvases" },
-  { href: "/shop?cat=Embroidery", no: "04", name: "Embroidery", meta: "2 kits", label: "Embroidery — slow, rhythmic stitching" },
-  { href: "/shop?cat=Journaling", no: "05", name: "Journaling", meta: "2 kits", label: "Journaling — slow mornings, considered pages" },
-  { href: "/shop?cat=Clay%20Art", no: "06", name: "Clay Art", meta: "2 kits", label: "Clay — shape, dry & glaze" },
-  { href: "/shop?cat=Seasonal", no: "07", name: "Seasonal Editions", meta: "Limited", label: "Seasonal — limited editions" },
+  { href: "/shop?cat=Diamond%20Painting", no: "01", name: "Diamond Painting", meta: "2 kits", label: "Diamond Painting — place, sparkle, reveal" },
+  { href: "/shop?cat=Rhinestone%20Art", no: "02", name: "Rhinestone Art", meta: "2 kits", label: "Rhinestone Art — faceted, light-catching pieces" },
+  { href: "/shop?cat=Bedazzle%20Tumblers", no: "03", name: "Bedazzle Tumblers", meta: "2 kits", label: "Tumblers — full-coat crystal drinkware" },
+  { href: "/shop?cat=Gem%20Phone%20Cases", no: "04", name: "Gem Phone Cases", meta: "2 kits", label: "Phone Cases — custom gem layouts" },
+  { href: "/shop?cat=Bedazzle%20Apparel", no: "05", name: "Bedazzle Apparel", meta: "1 kit", label: "Apparel — studs, pearls & crystals" },
+  { href: "/shop?cat=Crystal%20Keychains", no: "06", name: "Crystal Keychains", meta: "2 kits", label: "Keychains — quick, gift-ready sparkle" },
+  { href: "/shop?cat=Seasonal", no: "07", name: "Seasonal Editions", meta: "Limited", label: "Seasonal — limited bling editions" },
 ];
 
 export default function CraftIndex() {

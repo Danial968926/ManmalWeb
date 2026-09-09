@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/components/cart/CartProvider";
 
 export default function Header() {
@@ -49,15 +50,16 @@ export default function Header() {
               About
             </Link>
           </div>
-          <Link href="/" className="brand" aria-label="The Manmal Club home">
-            <span className="the">The</span>
-            <span className="nm">Manmal</span>
-            <span className="club">Club</span>
+          <Link href="/" className="brand brand-logo" aria-label="The Manmal Club home">
+            <Image
+              src="/manmal-logo-transparent.png"
+              alt="The Manmal Club"
+              width={1000}
+              height={1000}
+              priority
+            />
           </Link>
-          <div className="nav-links right">
-            <Link href="/contact" className="nav-link">
-              Contact
-            </Link>
+          <div className="nav-right">
             <div className="nav-icons">
               <button className="icon-btn search-btn" aria-label="Search">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -77,6 +79,11 @@ export default function Header() {
         </nav>
       </header>
 
+      <div
+        className={"mobile-scrim" + (navOpen ? " open" : "")}
+        onClick={() => setNavOpen(false)}
+        aria-hidden="true"
+      />
       <div className={"mobile-nav" + (navOpen ? " open" : "")}>
         <button className="mclose" aria-label="Close menu" onClick={() => setNavOpen(false)}>
           &times;

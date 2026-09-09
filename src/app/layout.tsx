@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
+import { Jost } from "next/font/google";
 import "./globals.css";
-import "./manmal.css";
-import { CartProvider } from "@/components/cart/CartProvider";
-import Grain from "@/components/layout/Grain";
-import AnnounceBar from "@/components/layout/AnnounceBar";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import RevealInit from "@/components/layout/RevealInit";
-import CartDrawer from "@/components/cart/CartDrawer";
-import Toast from "@/components/cart/Toast";
+
+const jost = Jost({
+  subsets: ["latin"],
+  variable: "--font-jost",
+});
 
 export const metadata: Metadata = {
-  title: "The Manmal Club — Premium DIY Kits for Makers",
+  title: "The Manmal Club — Premium DIY Bedazzling Kits",
   description:
-    "Premium DIY craft kits for grown-ups. Candle-making, resin, painting, embroidery and more — everything in one beautiful box. Made in Pakistan.",
+    "Premium DIY bedazzling kits. Diamond painting, rhinestone art, bedazzle tumblers, gem phone cases and more — everything in one beautiful box. Made in Pakistan.",
 };
 
 export default function RootLayout({
@@ -22,19 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <CartProvider>
-          <Grain />
-          <AnnounceBar />
-          <Header />
-          {children}
-          <Footer />
-          <CartDrawer />
-          <Toast />
-          <RevealInit />
-        </CartProvider>
-      </body>
+    <html lang="en" className={jost.variable}>
+      <body>{children}</body>
     </html>
   );
 }

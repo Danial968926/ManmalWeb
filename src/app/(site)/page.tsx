@@ -1,15 +1,14 @@
 import Link from "next/link";
 import { PRODUCTS } from "@/lib/products";
 import ProductCard from "@/components/product/ProductCard";
-import HeroRotator from "@/components/home/HeroRotator";
 import CraftIndex from "@/components/home/CraftIndex";
 import NewsletterForm from "@/components/forms/NewsletterForm";
 
 const FEATURED_IDS = [
-  "amber-soy-candle",
-  "coastal-resin-tray",
-  "daily-journal-set",
-  "festive-candle-trio",
+  "aurora-diamond-painting",
+  "crystal-tumbler",
+  "galaxy-rhinestone-art",
+  "festive-bling-box",
 ];
 
 export default function Home() {
@@ -17,90 +16,31 @@ export default function Home() {
 
   return (
     <main>
-      {/* ===== Hero ===== */}
-      <section className="hero2">
-        <div className="hero2-grid wrap">
-          <div className="hero2-copy">
-            <span className="eyebrow reveal">
-              Est. 2025 — A members&apos; atelier for makers · Pakistan
-            </span>
-            <h1 className="hero2-head reveal">
-              <span className="hh-make">Make</span>
-              <HeroRotator />
-              <span className="visually-hidden">Make something with your hands</span>
-            </h1>
-            <p className="lede reveal">
-              Premium DIY kits for grown-ups who want to create, unwind, and make something
-              with their own hands. Every material, tool and instruction — in one beautifully
-              packaged box.
-            </p>
-            <div className="hero-cta reveal">
-              <Link href="/shop" className="btn btn-primary">
-                Shop the kits
-              </Link>
-              <Link href="#index" className="btn btn-ghost">
-                Find your craft
-              </Link>
-            </div>
-            <div className="hero2-foot reveal">
-              <span>
-                <strong>7</strong> crafts
-              </span>
-              <span className="hf-sep" />
-              <span>
-                <strong>100%</strong> included
-              </span>
-              <span className="hf-sep" />
-              <span>
-                <strong>Nationwide</strong> delivery
-              </span>
-            </div>
-          </div>
-
-          <div className="hero2-art reveal">
-            <div className="ph">
-              <span>Hero — styled flat-lay of an open kit box</span>
-            </div>
-            <div className="member-tag">
-              <span className="mt-k">Member</span>
-              <span className="mt-v">No. 001</span>
-            </div>
-            <div className="seal" aria-hidden="true">
-              <svg viewBox="0 0 200 200">
-                <defs>
-                  <path
-                    id="sealpath"
-                    d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"
-                  />
-                </defs>
-                <text className="seal-text">
-                  <textPath href="#sealpath" startOffset="0">
-                    THE MANMAL CLUB · EST 2025 · MAKERS WELCOME ·{" "}
-                  </textPath>
-                </text>
-              </svg>
-              <span className="seal-mid script">m</span>
-            </div>
-          </div>
+      {/* ===== Hero (full-bleed cinematic) ===== */}
+      <section className="hero-cine">
+        <div className="hero-cine-media" aria-hidden="true" />
+        <div className="hero-cine-inner reveal">
+          <h1 className="hero-cine-title script">The Manmal Club</h1>
+          <p className="hero-cine-tag">Premium DIY bedazzling kits · Made in Pakistan</p>
         </div>
       </section>
 
       {/* ===== Marquee ===== */}
       <div className="marquee" aria-hidden="true">
         <div className="marquee-track">
-          <span>Candle Making</span><span className="sep">·</span>
-          <span>Resin Art</span><span className="sep">·</span>
-          <span>Painting</span><span className="sep">·</span>
-          <span>Embroidery</span><span className="sep">·</span>
-          <span>Journaling</span><span className="sep">·</span>
-          <span>Clay Art</span><span className="sep">·</span>
+          <span>Diamond Painting</span><span className="sep">·</span>
+          <span>Rhinestone Art</span><span className="sep">·</span>
+          <span>Bedazzle Tumblers</span><span className="sep">·</span>
+          <span>Gem Phone Cases</span><span className="sep">·</span>
+          <span>Bedazzle Apparel</span><span className="sep">·</span>
+          <span>Crystal Keychains</span><span className="sep">·</span>
           <span>Seasonal Editions</span><span className="sep">·</span>
-          <span>Candle Making</span><span className="sep">·</span>
-          <span>Resin Art</span><span className="sep">·</span>
-          <span>Painting</span><span className="sep">·</span>
-          <span>Embroidery</span><span className="sep">·</span>
-          <span>Journaling</span><span className="sep">·</span>
-          <span>Clay Art</span><span className="sep">·</span>
+          <span>Diamond Painting</span><span className="sep">·</span>
+          <span>Rhinestone Art</span><span className="sep">·</span>
+          <span>Bedazzle Tumblers</span><span className="sep">·</span>
+          <span>Gem Phone Cases</span><span className="sep">·</span>
+          <span>Bedazzle Apparel</span><span className="sep">·</span>
+          <span>Crystal Keychains</span><span className="sep">·</span>
           <span>Seasonal Editions</span><span className="sep">·</span>
         </div>
       </div>
@@ -114,11 +54,11 @@ export default function Home() {
               <h2 className="h2">
                 Seven ways
                 <br />
-                to make
+                to sparkle
               </h2>
             </div>
             <p className="muted">
-              Whatever pulls you in — pick a craft and we&apos;ll send the whole experience,
+              Whatever pulls you in — pick a style and we&apos;ll send the whole experience,
               ready to begin. Hover to preview.
             </p>
           </div>

@@ -5,7 +5,7 @@ import { byId, rs } from "@/lib/products";
 import { useCart } from "./CartProvider";
 
 export default function CartDrawer() {
-  const { cart, subtotal, isOpen, closeCart, changeQty, remove, toast } = useCart();
+  const { cart, subtotal, isOpen, closeCart, changeQty, remove } = useCart();
 
   return (
     <>
@@ -74,14 +74,9 @@ export default function CartDrawer() {
             <p className="cart-note">
               Shipping &amp; taxes calculated at checkout. Free delivery over Rs. 5,000.
             </p>
-            <button
-              className="btn btn-primary btn-block"
-              onClick={() =>
-                toast("Checkout is a demo — connect a payment provider to go live")
-              }
-            >
+            <Link href="/checkout" className="btn btn-primary btn-block" onClick={closeCart}>
               Checkout
-            </button>
+            </Link>
           </div>
         )}
       </aside>

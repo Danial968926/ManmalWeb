@@ -23,6 +23,7 @@ interface CartContextValue {
   add: (id: string, qty?: number) => void;
   changeQty: (id: string, delta: number) => void;
   remove: (id: string) => void;
+  clear: () => void;
   openCart: () => void;
   closeCart: () => void;
   toast: (msg: string) => void;
@@ -97,6 +98,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setCart((prev) => prev.filter((i) => i.id !== id));
   }, []);
 
+  const clear = useCallback(() => {
+    setCart([]);
+  }, []);
+
   // body scroll lock while drawer open
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -133,6 +138,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     add,
     changeQty,
     remove,
+    clear,
     openCart,
     closeCart,
     toast,

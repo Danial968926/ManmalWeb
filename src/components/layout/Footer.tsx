@@ -18,10 +18,10 @@ export default function Footer() {
           </div>
           <div className="foot-col">
             <h4>Shop</h4>
-            <Link href="/shop?cat=Candle%20Making">Candle Making</Link>
-            <Link href="/shop?cat=Resin%20Art">Resin Art</Link>
-            <Link href="/shop?cat=Painting">Painting</Link>
-            <Link href="/shop?cat=Embroidery">Embroidery</Link>
+            <Link href="/shop?cat=Diamond%20Painting">Diamond Painting</Link>
+            <Link href="/shop?cat=Rhinestone%20Art">Rhinestone Art</Link>
+            <Link href="/shop?cat=Bedazzle%20Tumblers">Bedazzle Tumblers</Link>
+            <Link href="/shop?cat=Crystal%20Keychains">Crystal Keychains</Link>
             <Link href="/shop">All kits</Link>
           </div>
           <div className="foot-col">

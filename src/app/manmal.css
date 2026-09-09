@@ -124,10 +124,10 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.04;letter-s
 .site-head{position:sticky;top:0;z-index:60;background:var(--oat);border-bottom:1px solid var(--line)}
 .nav{
   display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  padding-block:18px;gap:20px;
+  padding-block:26px;gap:20px;
 }
-.nav-links{display:flex;gap:30px;align-items:center}
-.nav-links.right{justify-content:flex-end}
+.nav-links{display:none}
+.nav-right{display:flex;align-items:center;justify-content:flex-end}
 .nav-link{
   font-family:var(--ui);font-weight:400;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink);position:relative;padding-block:4px;
@@ -153,19 +153,25 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.04;letter-s
   transform:scale(0);transition:transform .3s var(--ease)}
 .cart-count.show{transform:scale(1)}
 
-.burger{display:none;flex-direction:column;gap:5px;padding:6px}
+.burger{display:flex;flex-direction:column;gap:5px;padding:6px}
 .burger span{width:22px;height:1.5px;background:var(--ink);transition:.3s var(--ease)}
 
 /* mobile drawer nav */
+.mobile-scrim{
+  position:fixed;inset:0;z-index:79;background:rgba(43,37,33,.4);
+  opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s var(--ease);
+}
+.mobile-scrim.open{opacity:1;visibility:visible}
 .mobile-nav{
-  position:fixed;inset:0;z-index:80;background:var(--oat);
-  transform:translateX(100%);transition:transform .45s var(--ease);
-  display:flex;flex-direction:column;padding:28px var(--gutter);
+  position:fixed;top:0;left:0;bottom:0;z-index:80;width:min(82vw,340px);
+  background:var(--oat);border-right:1px solid var(--line);box-shadow:2px 0 30px rgba(43,37,33,.12);
+  transform:translateX(-100%);transition:transform .4s var(--ease);
+  display:flex;flex-direction:column;padding:24px var(--gutter);
 }
 .mobile-nav.open{transform:translateX(0)}
-.mobile-nav .mclose{align-self:flex-end;font-size:1.8rem;line-height:1;color:var(--ink)}
-.mobile-nav ul{margin-top:8vh;display:flex;flex-direction:column;gap:6px}
-.mobile-nav a{font-family:var(--display);font-size:2.4rem;color:var(--ink)}
+.mobile-nav .mclose{align-self:flex-end;font-size:1.6rem;line-height:1;color:var(--ink)}
+.mobile-nav ul{margin-top:32px;display:flex;flex-direction:column;gap:4px}
+.mobile-nav a{font-family:var(--ui);font-size:1rem;letter-spacing:.04em;color:var(--ink);display:block;padding-block:12px;border-bottom:1px solid var(--line-soft)}
 .mobile-nav a:hover{color:var(--brick)}
 
 /* ============================================================
@@ -534,6 +540,43 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.04;letter-s
 }
 
 /* ============================================================
+   CHECKOUT PAGE
+   ============================================================ */
+.checkout-hero{padding-block:clamp(44px,7vw,80px) clamp(16px,2.5vw,28px)}
+.checkout-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(32px,5vw,72px);align-items:start}
+.checkout-empty{padding:60px 0;text-align:center}
+.checkout-empty p{margin:14px 0 24px}
+
+.pay-methods{display:grid;gap:12px}
+.pay-option{display:flex;align-items:flex-start;gap:14px;border:1px solid var(--line);border-radius:2px;padding:1em 1.2em;cursor:pointer;transition:border-color .25s}
+.pay-option:has(input:checked){border-color:var(--brick)}
+.pay-option input{width:auto;margin-top:4px}
+.pay-option-body strong{font-family:var(--ui);font-size:.85rem;letter-spacing:.04em}
+.pay-option-body p{margin-top:4px;color:var(--ink-soft);font-size:.92rem}
+.pay-bank-details{margin-top:10px;padding:14px 16px;background:var(--oat);border-radius:2px;font-family:var(--mono);font-size:.82rem;line-height:1.7}
+
+.order-summary{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,3vw,32px);position:sticky;top:100px}
+.order-summary h3{font-family:var(--display);font-weight:500;font-size:1.3rem;margin-bottom:18px}
+.summary-items{max-height:340px;overflow-y:auto}
+.summary-items .ci{grid-template-columns:48px 1fr auto;padding:14px 0}
+.summary-items .ci .ph{width:48px;height:60px}
+.summary-totals{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;font-family:var(--ui);font-size:.85rem}
+.summary-row{display:flex;justify-content:space-between}
+.summary-row.grand{font-family:var(--display);font-size:1.3rem;letter-spacing:0;padding-top:8px;border-top:1px solid var(--line);margin-top:4px}
+
+@media (max-width:860px){
+  .checkout-grid{grid-template-columns:1fr;gap:36px}
+  .order-summary{position:static}
+}
+
+/* ============================================================
+   ORDER CONFIRMATION PAGE
+   ============================================================ */
+.confirm-hero{padding-block:clamp(70px,10vw,120px);text-align:center}
+.confirm-mark{width:64px;height:64px;border-radius:50%;border:1px solid var(--brick);color:var(--brick);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.6rem}
+.confirm-order-no{font-family:var(--mono);letter-spacing:.08em;color:var(--brick);margin-top:10px;display:inline-block}
+
+/* ============================================================
    SIGNATURE — grain, kinetic hero, seal, craft index, member card
    ============================================================ */
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -636,4 +679,41 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.04;letter-s
 @media (prefers-reduced-motion:reduce){
   .seal svg{animation:none}
   .rot-word{transition:none}
+}
+
+/* ---- Cinematic full-bleed hero (aftwds style) ---- */
+.hero-cine{
+  position:relative;min-height:86svh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;text-align:center;
+}
+.hero-cine-media{
+  position:absolute;inset:0;z-index:1;
+  background-color:var(--oat-deep);
+  /* Placeholder gradient. To use a real photo: drop public/hero.jpg and add
+     url('/hero.jpg') as the LAST background-image layer below (it sits under the scrim). */
+  background-image:
+    linear-gradient(180deg,rgba(43,37,33,.45) 0%,rgba(43,37,33,.25) 40%,rgba(43,37,33,.55) 100%),
+    linear-gradient(135deg,#B8584C 0%,#9A2E25 38%,#7C2219 70%,#5d2a1f 100%);
+  background-size:cover;background-position:center;
+}
+.hero-cine-inner{position:relative;z-index:2;padding-inline:var(--gutter)}
+.hero-cine-title{
+  font-family:var(--script);color:var(--paper);font-weight:400;
+  font-size:clamp(3.4rem,11vw,9rem);line-height:.9;
+  text-shadow:0 2px 30px rgba(0,0,0,.35);
+}
+.hero-cine-tag{
+  font-family:var(--ui);text-transform:uppercase;letter-spacing:.34em;font-weight:400;
+  font-size:clamp(.7rem,1.1vw,.9rem);color:var(--paper);opacity:.92;margin-top:18px;
+}
+@media (max-width:860px){
+  .hero-cine{min-height:78svh}
+  .hero-cine-tag{letter-spacing:.22em}
+}
+
+/* ---- Image logo (header brand) ---- */
+.brand-logo{display:flex;align-items:center;justify-content:center;line-height:0}
+.brand-logo img{height:260px;width:auto;display:block;margin-block:-70px}
+@media (max-width:860px){
+  .brand-logo img{height:200px;margin-block:-54px}
 }

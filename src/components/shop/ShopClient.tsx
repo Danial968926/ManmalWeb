@@ -6,14 +6,14 @@ import { PRODUCTS, CATEGORIES } from "@/lib/products";
 import ProductCard from "@/components/product/ProductCard";
 
 const SUBTITLES: Record<string, string> = {
-  All: "Everything you need to make, in one box. Choose a craft below.",
-  "Candle Making": "Pour, scent and set your own candles — calm, fragrant, satisfying.",
-  "Resin Art": "Cast trays, coasters and keepsakes with glassy, jewel-like finishes.",
-  Painting: "Loose, expressive canvases — colour chosen to calm, not to fuss.",
-  Embroidery: "Slow, rhythmic stitching on natural linen and cotton.",
-  Journaling: "Tools and rituals for slow mornings and considered pages.",
-  "Clay Art": "Shape, dry and glaze little objects to keep or gift.",
-  Seasonal: "Limited editions, made for the time of year.",
+  All: "Everything you need to bedazzle, in one box. Choose a style below.",
+  "Diamond Painting": "Place thousands of shimmering drills to reveal a glowing canvas.",
+  "Rhinestone Art": "Faceted rhinestone pieces that catch the light from every angle.",
+  "Bedazzle Tumblers": "Full-coat crystal drinkware — head-turning, café-ready sparkle.",
+  "Gem Phone Cases": "Custom gem and pearl layouts for a case that feels made for you.",
+  "Bedazzle Apparel": "Studs, pearls and crystals to turn denim into a statement piece.",
+  "Crystal Keychains": "Quick, gift-ready sparkle you can finish in an evening.",
+  Seasonal: "Limited bling editions, made for the time of year.",
 };
 
 export default function ShopClient({ initialCat }: { initialCat: string }) {

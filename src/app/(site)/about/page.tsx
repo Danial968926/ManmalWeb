@@ -51,11 +51,10 @@ export default function AboutPage() {
                 find.
               </p>
               <p>
-                Anyone who has tried to take up a hobby here knows the feeling. You want to make
-                a candle, paint a canvas, learn to embroider — and you spend three weekends
-                hunting down wax, the right wick, a fragrance that isn&apos;t overpowering, a
-                vessel that doesn&apos;t look cheap. By the time you have it all, the spark has
-                gone.
+                Anyone who has tried to take up a hobby here knows the feeling. You want to
+                bedazzle a tumbler, start a diamond painting, bling a phone case — and you spend
+                three weekends hunting down the right rhinestones, an applicator pen, an adhesive
+                that actually holds. By the time you have it all, the spark has gone.
               </p>
               <p>
                 We thought the making should be the hard part — the good kind of hard. Not the
