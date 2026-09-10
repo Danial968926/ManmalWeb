@@ -26,7 +26,7 @@
   --display: "Bodoni Moda", serif;
   --body: "EB Garamond", Georgia, serif;
   --ui: "Jost", -apple-system, system-ui, sans-serif;
-  --script: "Pinyon Script", cursive;
+  --script: cursive;
   --mono: ui-monospace, "SF Mono", Menlo, monospace;
 
   /* layout */
