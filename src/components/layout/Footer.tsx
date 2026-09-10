@@ -1,5 +1,6 @@
 import Link from "next/link";
 import NewsletterForm from "@/components/forms/NewsletterForm";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,9 +8,16 @@ export default function Footer() {
       <div className="wrap">
         <div className="foot-top">
           <div className="foot-brand">
-            <span className="the">The</span>
-            <span className="nm">Manmal</span>
-            <span className="club">Club</span>
+            <Link href="/" className="brand brand-logo" aria-label="The Manmal Club home">
+              <Image
+                src="/manmal-logo-transparent.png"
+                alt="The Manmal Club"
+                width={1000}
+                height={1000}
+                priority
+              />
+            </Link>
+
             <p>
               Premium DIY kits for grown-ups who want to slow down and make something.
               Curated and shipped from Pakistan.

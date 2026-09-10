@@ -50,29 +50,38 @@ export default function CheckoutClient() {
           <label htmlFor="coName">Full name</label>
           <input id="coName" name="name" type="text" required placeholder="Your name" />
         </div>
+
         <div className="field-row">
           <div className="field">
             <label htmlFor="coEmail">Email</label>
             <input id="coEmail" name="email" type="email" required placeholder="you@email.com" />
           </div>
           <div className="field">
-            <label htmlFor="coPhone">Phone</label>
+            <label htmlFor="coPhone">Phone No.</label>
             <input id="coPhone" name="phone" type="tel" required placeholder="03XX XXXXXXX" />
           </div>
         </div>
+
+        <div className="field-row">
+          <div className="field">
+            <label htmlFor="coProvince">Province</label>
+            <input id="coProvince" name="province" type="text" required placeholder="Punjab" />
+          </div>
+          <div className="field">
+            <label htmlFor="coCity">City</label>
+            <input id="coCity" name="city" type="text" required placeholder="Faisalabad" />
+          </div>
+        </div>
+
         <div className="field">
           <label htmlFor="coAddress">Delivery address</label>
           <input id="coAddress" name="address" type="text" required placeholder="House, street, area" />
-        </div>
-        <div className="field">
-          <label htmlFor="coCity">City</label>
-          <input id="coCity" name="city" type="text" required placeholder="Karachi" />
         </div>
 
         <div className="field">
           <label>Payment method</label>
           <div className="pay-methods">
-            <label className="pay-option">
+            <label className={`pay-option ${paymentMethod === "cod" ? "active" : ""}`}>
               <input
                 type="radio"
                 name="paymentMethod"
@@ -80,12 +89,14 @@ export default function CheckoutClient() {
                 checked={paymentMethod === "cod"}
                 onChange={() => setPaymentMethod("cod")}
               />
+              <span className="custom-radio"></span>
               <span className="pay-option-body">
                 <strong>Cash on Delivery</strong>
                 <p>Pay in cash when your order arrives.</p>
               </span>
             </label>
-            <label className="pay-option">
+
+            <label className={`pay-option ${paymentMethod === "bank_transfer" ? "active" : ""}`}>
               <input
                 type="radio"
                 name="paymentMethod"
@@ -93,6 +104,7 @@ export default function CheckoutClient() {
                 checked={paymentMethod === "bank_transfer"}
                 onChange={() => setPaymentMethod("bank_transfer")}
               />
+              <span className="custom-radio"></span>
               <span className="pay-option-body">
                 <strong>Bank Transfer</strong>
                 <p>Transfer the total, then we&apos;ll confirm and dispatch your order.</p>
