@@ -20,7 +20,7 @@ export default function Home() {
       <section className="hero-cine">
         <div className="hero-cine-media" aria-hidden="true" />
         <div className="hero-cine-inner reveal">
-          <h1 className="hero-cine-title script">The Manmal Club</h1>
+          <h1 className="hero-cine-title">The Manmal Club</h1>
           <p className="hero-cine-tag">Premium DIY bedazzling kits · Made in Pakistan</p>
         </div>
       </section>
