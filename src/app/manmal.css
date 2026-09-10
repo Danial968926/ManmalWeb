@@ -2571,7 +2571,6 @@ h4 {
   padding-inline: var(--gutter);
 }
 .hero-cine-title {
-  font-family: var(--script);
   color: var(--paper);
   font-weight: 400;
   font-size: clamp(3.4rem, 11vw, 9rem);
