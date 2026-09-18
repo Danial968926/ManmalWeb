@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { byId, rs } from "@/lib/products";
+import { rs } from "@/lib/products";
 import { useCart } from "./CartProvider";
 
 export default function CartDrawer() {
@@ -32,30 +32,28 @@ export default function CartDrawer() {
               </Link>
             </div>
           ) : (
-            cart.map((i) => {
-              const p = byId(i.id);
-              if (!p) return null;
+            cart.map((item) => {
               return (
-                <div className="ci" key={p.id} data-id={p.id}>
+                <div className="ci" key={item.id} data-id={item.id}>
                   <div className="ph">
-                    <span>{p.cat}</span>
+                    <span>{item.cat || "Kit"}</span>
                   </div>
                   <div>
-                    <div className="ci-cat">{p.cat}</div>
-                    <div className="ci-name">{p.name}</div>
+                    <div className="ci-cat">{item.cat}</div>
+                    <div className="ci-name">{item.name}</div>
                     <div className="qty">
-                      <button onClick={() => changeQty(p.id, -1)} aria-label="Decrease">
+                      <button onClick={() => changeQty(item.id, -1)} aria-label="Decrease">
                         &minus;
                       </button>
-                      <span>{i.qty}</span>
-                      <button onClick={() => changeQty(p.id, 1)} aria-label="Increase">
+                      <span>{item.qty}</span>
+                      <button onClick={() => changeQty(item.id, 1)} aria-label="Increase">
                         +
                       </button>
                     </div>
                   </div>
                   <div style={{ textAlign: "right" }}>
-                    <div className="ci-price">{rs(p.price * i.qty)}</div>
-                    <button className="ci-remove" onClick={() => remove(p.id)}>
+                    <div className="ci-price">{rs(item.price * item.qty)}</div>
+                    <button className="ci-remove" onClick={() => remove(item.id)}>
                       Remove
                     </button>
                   </div>

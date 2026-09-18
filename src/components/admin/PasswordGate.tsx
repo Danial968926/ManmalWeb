@@ -2,32 +2,61 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const SESSION_KEY = "manmal_admin_unlocked";
-// Stub only — this is a UI placeholder until the backend issues a real session.
-const STUB_PASSWORD = "manmal-admin";
+const SESSION_KEY = "manmal_admin_token";
 
 export default function PasswordGate({ children }: { children: React.ReactNode }) {
   const [unlocked, setUnlocked] = useState<boolean | null>(null);
-  const [value, setValue] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
-  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // Custom inline notification state (Toast-like banner)
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- sessionStorage is only available client-side; starting from `null` avoids an SSR/client hydration mismatch (same pattern as CartProvider's localStorage hydration).
-    setUnlocked(sessionStorage.getItem(SESSION_KEY) === "1");
+    const token = sessionStorage.getItem(SESSION_KEY);
+    setUnlocked(!!token);
   }, []);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  // Auto-hide toast after 4 seconds
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (value === STUB_PASSWORD) {
-      sessionStorage.setItem(SESSION_KEY, "1");
-      setUnlocked(true);
-      setError(false);
-    } else {
-      setError(true);
+    setIsLoading(true);
+    setToast(null);
+
+    try {
+      const response = await fetch("https://localhost:7227/api/Auth/admin-login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data?.data?.token) {
+        sessionStorage.setItem(SESSION_KEY, data.data.token);
+        setUnlocked(true);
+        setToast({ message: "Admin logged in successfully!", type: "success" });
+      } else {
+        setToast({ message: data?.message || "Invalid email or password!", type: "error" });
+      }
+    } catch (error) {
+      setToast({ message: "Unable to connect to the backend server.", type: "error" });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -35,7 +64,20 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
 
   if (!unlocked) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="relative flex min-h-screen items-center justify-center bg-background px-4">
+        
+        {/* Custom Floating Toast Notification */}
+        {toast && (
+          <div className={`absolute top-6 right-6 flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium shadow-md transition-all duration-300 z-50 ${
+            toast.type === "success" 
+              ? "bg-emerald-500 text-white" 
+              : "bg-destructive text-destructive-foreground"
+          }`}>
+            {toast.type === "success" ? <CheckCircle2 className="size-4" /> : <AlertCircle className="size-4" />}
+            <span>{toast.message}</span>
+          </div>
+        )}
+
         <form
           onSubmit={handleSubmit}
           className="w-full max-w-sm rounded-xl border border-border bg-card p-8 shadow-sm"
@@ -49,25 +91,33 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
               className="size-16 rounded-full bg-secondary object-contain p-1.5"
             />
             <div>
-              <h1 className="text-lg font-semibold text-foreground">Admin access</h1>
+              <h1 className="text-lg font-semibold text-foreground">Admin Access</h1>
               <p className="mt-0.5 text-sm text-muted-foreground">
-                Enter the password to continue.
+                Enter your admin credentials to continue.
               </p>
             </div>
           </div>
-          <div className="relative">
+
+          <div className="mb-4">
+            <input
+              type="email"
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Admin Email"
+              required
+              className="w-full rounded-lg border border-input bg-background py-2 px-3 text-sm text-foreground outline-none transition-colors duration-150 focus:border-ring"
+            />
+          </div>
+
+          <div className="relative mb-4">
             <input
               type={show ? "text" : "password"}
-              autoFocus
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
-                setError(false);
-              }}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              aria-label="Admin password"
-              aria-invalid={error || undefined}
-              className="w-full rounded-lg border border-input bg-background py-2 pr-10 pl-3 text-sm text-foreground outline-none transition-colors duration-150 focus:border-ring aria-invalid:border-destructive"
+              required
+              className="w-full rounded-lg border border-input bg-background py-2 pr-10 pl-3 text-sm text-foreground outline-none transition-colors duration-150 focus:border-ring"
             />
             <button
               type="button"
@@ -78,13 +128,9 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
               {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>
           </div>
-          {error && (
-            <p role="alert" className="mt-2 text-sm text-destructive">
-              Incorrect password. Try again.
-            </p>
-          )}
-          <Button type="submit" className="mt-4 w-full" size="lg">
-            Enter dashboard
+
+          <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+            {isLoading ? "Authenticating..." : "Enter Dashboard"}
           </Button>
         </form>
       </div>

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ImageOff, Pencil, Plus, Search, SearchX, Trash2 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { CATEGORIES, rs } from "@/lib/products";
+import { rs } from "@/lib/products";
 import { useAdminData } from "@/components/admin/AdminDataProvider";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/types";
@@ -14,7 +14,7 @@ import type { Product } from "@/lib/types";
 const PLACEHOLDER_IMG = "/products/placeholder.jpg";
 
 function Thumb({ p }: { p: Product }) {
-  if (p.img === PLACEHOLDER_IMG) {
+  if (p.img === PLACEHOLDER_IMG || !p.img) {
     return (
       <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
         <ImageOff className="size-4" />
@@ -22,12 +22,9 @@ function Thumb({ p }: { p: Product }) {
     );
   }
   return (
-    <Image
+    <img
       src={p.img}
       alt={p.name}
-      width={40}
-      height={40}
-      unoptimized={p.img.startsWith("data:")}
       className="size-10 shrink-0 rounded-md border border-border object-cover"
     />
   );
@@ -35,7 +32,7 @@ function Thumb({ p }: { p: Product }) {
 
 export default function ProductsTable() {
   const router = useRouter();
-  const { products, deleteProduct } = useAdminData();
+  const { products, categories, deleteProduct } = useAdminData();
   const [query, setQuery] = useState("");
   const [cat, setCat] = useState("All");
 
@@ -49,7 +46,7 @@ export default function ProductsTable() {
   }, [products, query, cat]);
 
   function handleDelete(id: string) {
-    if (!window.confirm("Delete this product? This only affects this preview session.")) return;
+    if (!window.confirm("Delete this product?")) return;
     deleteProduct(id);
   }
 
@@ -74,9 +71,10 @@ export default function ProductsTable() {
           aria-label="Filter by category"
           className="cursor-pointer rounded-lg border border-input bg-card px-3 py-2 text-sm outline-none transition-colors duration-150 focus:border-ring"
         >
-          {CATEGORIES.map((c) => (
-            <option key={c} value={c}>
-              {c}
+          <option value="All">All Categories</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.name}>
+              {c.name}
             </option>
           ))}
         </select>

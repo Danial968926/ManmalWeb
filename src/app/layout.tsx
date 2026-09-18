@@ -9,8 +9,7 @@ const jost = Jost({
 
 export const metadata: Metadata = {
   title: "The Manmal Club — Premium DIY Bedazzling Kits",
-  description:
-    "Premium DIY bedazzling kits. Diamond painting, rhinestone art, bedazzle tumblers, gem phone cases and more — everything in one beautiful box. Made in Pakistan.",
+  description: "Premium DIY bedazzling kits. Made in Pakistan.",
 };
 
 export default function RootLayout({
@@ -20,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={jost.variable}>
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }

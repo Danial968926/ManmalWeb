@@ -9,7 +9,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { byId } from "@/lib/products";
 import type { CartLine } from "@/lib/types";
 
 const KEY = "manmal_cart_v1";
@@ -20,7 +19,7 @@ interface CartContextValue {
   subtotal: number;
   isOpen: boolean;
   toastMsg: string | null;
-  add: (id: string, qty?: number) => void;
+  add: (product: { id: string; name: string; price: number; cat?: string; img?: string }, qty?: number) => void;
   changeQty: (id: string, delta: number) => void;
   remove: (id: string) => void;
   clear: () => void;
@@ -71,16 +70,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const closeCart = useCallback(() => setIsOpen(false), []);
 
   const add = useCallback(
-    (id: string, qty = 1) => {
+    (product: { id: string; name: string; price: number; cat?: string; img?: string }, qty = 1) => {
       setCart((prev) => {
-        const line = prev.find((i) => i.id === id);
+        const line = prev.find((i) => i.id === product.id);
         if (line) {
-          return prev.map((i) => (i.id === id ? { ...i, qty: i.qty + qty } : i));
+          return prev.map((i) => (i.id === product.id ? { ...i, qty: i.qty + qty } : i));
         }
-        return [...prev, { id, qty }];
+        return [...prev, { ...product, qty }];
       });
-      const p = byId(id);
-      toast((p ? p.name : "Item") + " added to bag");
+      toast(`${product.name || "Item"} added to bag`);
       setIsOpen(true);
     },
     [toast]
@@ -120,12 +118,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const count = useMemo(() => cart.reduce((a, i) => a + i.qty, 0), [cart]);
+  
+  // Subtotal calculate karna directly cart items se bina byId ki zaroorat ke
   const subtotal = useMemo(
-    () =>
-      cart.reduce((a, i) => {
-        const p = byId(i.id);
-        return a + (p ? p.price * i.qty : 0);
-      }, 0),
+    () => cart.reduce((a, i) => a + (i.price * i.qty), 0),
     [cart]
   );
 

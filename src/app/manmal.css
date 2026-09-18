@@ -26,7 +26,7 @@
   --display: "Bodoni Moda", serif;
   --body: "EB Garamond", Georgia, serif;
   --ui: "Jost", -apple-system, system-ui, sans-serif;
-  --script: cursive;
+  --script: "Great Vibes", cursive;
   --mono: ui-monospace, "SF Mono", Menlo, monospace;
 
   /* layout */
@@ -626,74 +626,105 @@ h4 {
   margin-bottom: 18px;
 }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* ==========================================
+   Footer Main Layout
+   ================================---------- */
 .site-foot {
   background: var(--ink);
   color: var(--oat);
-  padding-top: 80px;
-  margin-top: 0;
+  padding: auto;
+  margin: auto;
 }
+
+.site-foot .wrap {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+/* ==========================================
+   Desktop Pattern (Default)
+   ================================---------- */
 .foot-top {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-bottom: 60px;
   border-bottom: 1px solid rgba(244, 240, 232, 0.14);
 }
-/* ---- Footer brand logo ---- */
+
+.foot-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  flex: 0 0 30rem;
+}
+
+.foot-brand .brand-logo {
+  display: block;
+  max-width: 260px;
+  width: 100%;
+}
+
 .foot-brand img {
-  height: 150px;
-  margin-top: -80px;
-  margin-bottom: -80px;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+  margin: 0 0 10px 0 !important;
 }
 
 .foot-brand p {
-  margin-top: 30px;
+  margin-top: 15px;
   max-width: 34ch;
   color: rgba(244, 240, 232, 0.7);
-  font-size: 0.98rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-@media (max-width: 860px) {
-  .foot-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .foot-brand img {
-    /* margin-inline: auto; */
-    min-height: 300px;
-    margin-top: -100px;
-    margin-bottom: -60px;
-  }
-
-  .foot-brand p {
-    margin-inline: auto;
-  }
+/* Links container */
+.FootLinks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 150px;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1;
 }
+
+.foot-col {
+  min-width: 150px;
+  text-align: left;
+}
+
 .foot-col h4 {
   font-family: var(--ui);
   font-weight: 500;
-  font-size: 0.72rem;
+  font-size: 1rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(244, 240, 232, 0.55);
   margin-bottom: 18px;
 }
+
 .foot-col a {
+  font-size: 0.8rem;
+  letter-spacing: 0.3px;
   display: block;
   padding: 6px 0;
   color: rgba(244, 240, 232, 0.85);
-  font-size: 1rem;
   transition: color 0.25s;
 }
+
 .foot-col a:hover {
-  color: var(--brick-soft);
+  color: var(--brick);
 }
+
+/* ==========================================
+   Footer Bottom & Newsletter Styling
+   ================================---------- */
 .foot-bottom {
   display: flex;
   justify-content: space-between;
@@ -707,21 +738,24 @@ h4 {
   text-transform: uppercase;
   color: rgba(244, 240, 232, 0.5);
 }
+
 .foot-bottom .socials {
   display: flex;
   gap: 22px;
 }
+
 .foot-bottom .socials a:hover {
   color: var(--brick-soft);
 }
 
-/* newsletter inline */
 .news {
   display: flex;
   gap: 10px;
   margin-top: 8px;
   max-width: 340px;
+  width: 100%;
 }
+
 .news input {
   flex: 1;
   background: transparent;
@@ -733,13 +767,16 @@ h4 {
   font-size: 0.85rem;
   letter-spacing: 0.04em;
 }
+
 .news input::placeholder {
   color: rgba(244, 240, 232, 0.45);
 }
+
 .news input:focus {
   outline: none;
   border-color: var(--brick-soft);
 }
+
 .news button {
   background: var(--brick);
   color: var(--paper);
@@ -749,9 +786,180 @@ h4 {
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
 }
+
 .news button:hover {
   background: var(--brick-soft);
+}
+
+/* ==========================================
+   Responsive Media Queries
+   ================================---------- */
+
+/* Mobile Devices (768px and down) */
+@media (max-width: 768px) {
+  .site-foot {
+    padding-top: 50px;
+  }
+
+  .foot-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 24px 0;
+  }
+
+  .foot-bottom .socials {
+    justify-content: center;
+  }
+}
+
+/* Ultra-Wide Screens / WQXGA (2000px and up) */
+@media (min-width: 2000px) {
+  .site-foot .wrap {
+    padding: 0 120px;
+  }
+
+  .foot-top {
+    gap: 120px;
+  }
+
+  .FootLinks {
+    gap: 120px;
+  }
+}
+
+/* ==========================================
+   TABLET & MOBILE PATTERN (1024px and down)
+   ================================---------- */
+
+/* @media (max-width: 2560px) {
+  .foot-top {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .foot-brand {
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .foot-brand .brand-logo {
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    margin-top: -120px !important;
+  }
+
+  .foot-brand img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    margin: 0 auto -50px auto !important;
+  }
+
+  .foot-brand p {
+    margin-top: 10px;
+    margin-inline: auto;
+  }
+
+  .news {
+    margin-inline: auto;
+  }
+
+  .FootLinks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .foot-col {
+    text-align: left;
+  }
+
+  .foot-col a {
+    text-align: left;
+  }
+} */
+
+@media (max-width: 1024px) {
+  .foot-top {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .foot-brand {
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Logo container ko control rakhein */
+  .foot-brand .brand-logo {
+    display: block;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  /* Image ko 50rem ki bajaye proper auto size dein */
+  .foot-brand img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    margin: 0 auto -50px auto !important;
+  }
+
+  .foot-brand p {
+    margin-inline: auto;
+  }
+
+  .news {
+    margin-inline: auto;
+  }
+
+  .FootLinks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    width: 100%;
+    margin-top: -60px;
+  }
+
+  .foot-col {
+    text-align: left;
+  }
+
+  .foot-col a {
+    text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .FootLinks {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 35px;
+  }
 }
 
 /* ============================================================
@@ -2578,6 +2786,7 @@ h4 {
   line-height: 0.9;
   text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
 }
+
 .hero-cine-tag {
   font-family: var(--ui);
   text-transform: uppercase;
@@ -2598,6 +2807,7 @@ h4 {
 }
 
 /* ---- Image logo (header brand) ---- */
+/* ---- Image logo (header brand) ---- */
 .brand-logo {
   display: flex;
   align-items: center;
@@ -2605,12 +2815,23 @@ h4 {
   line-height: 0;
 }
 .brand-logo img {
-  height: 260px;
+  height: 25rem;
   width: auto;
   display: block;
+  margin-block: -70px;
 }
+
+/* Laptop View Adjustment (Balanced size for mid-large screens) */
+@media (min-width: 861px) and (max-width: 1400px) {
+  .brand-logo img {
+    height: 250px;
+    margin-block: -38px;
+  }
+}
+
 @media (max-width: 860px) {
   .brand-logo img {
-    height: 200px;
+    height: 300px;
+    margin-block: -54px;
   }
 }

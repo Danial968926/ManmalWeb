@@ -4,30 +4,31 @@ import { useState } from "react";
 import Image from "next/image";
 import { ImageOff, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CATEGORIES } from "@/lib/products";
 import type { Product } from "@/lib/types";
 
-const EDITABLE_CATEGORIES = CATEGORIES.filter((c) => c !== "All");
 const PLACEHOLDER_IMG = "/products/placeholder.jpg";
-
-function slugify(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
 
 export default function ProductForm({
   initial,
+  categories,
   onSave,
   onCancel,
 }: {
   initial: Product | null;
-  onSave: (product: Product) => void;
+  categories: { id: number; name: string }[];
+  onSave: (formData: FormData) => Promise<void>;
   onCancel: () => void;
 }) {
   const [name, setName] = useState(initial?.name ?? "");
-  const [cat, setCat] = useState(initial?.cat ?? EDITABLE_CATEGORIES[0]);
+  
+const [categoryId, setCategoryId] = useState(() => {
+    if (initial?.cat && categories?.length > 0) {
+      const found = categories.find((c) => c.name === initial.cat);
+      if (found) return found.id.toString();
+    }
+    return categories?.length > 0 ? categories[0].id.toString() : "1";
+  });
+
   const [price, setPrice] = useState(initial ? String(initial.price) : "");
   const [was, setWas] = useState(initial?.was ? String(initial.was) : "");
   const [tag, setTag] = useState(initial?.tag ?? "");
@@ -36,39 +37,42 @@ export default function ProductForm({
   const [time, setTime] = useState(initial?.time ?? "");
   const [level, setLevel] = useState(initial?.level ?? "Beginner");
   const [includes, setIncludes] = useState(initial?.includes.join(", ") ?? "");
-  const [img, setImg] = useState(initial?.img ?? PLACEHOLDER_IMG);
+  
+  // Image handling for file upload
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>(initial?.img ?? PLACEHOLDER_IMG);
+  const [submitting, setSubmitting] = useState(false);
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === "string") setImg(reader.result);
-    };
-    reader.readAsDataURL(file);
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
     e.target.value = "";
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const product: Product = {
-      id: initial?.id ?? (slugify(name) || `product-${Date.now()}`),
-      cat,
-      name,
-      price: Number(price) || 0,
-      was: was ? Number(was) : null,
-      tag: tag || null,
-      blurb,
-      makes,
-      time,
-      level,
-      includes: includes
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
-      img,
-    };
-    onSave(product);
+    setSubmitting(true);
+
+    const formData = new FormData();
+    formData.append("Name", name);
+    formData.append("CategoryId", categoryId);
+    formData.append("Price", price);
+    if (was) formData.append("WasPrice", was);
+    if (tag) formData.append("Tag", tag);
+    formData.append("Blurb", blurb);
+    formData.append("Makes", makes);
+    formData.append("Time", time);
+    formData.append("Level", level);
+    formData.append("Includes", includes);
+    
+    if (imageFile) {
+      formData.append("Image", imageFile);
+    }
+
+    await onSave(formData);
+    setSubmitting(false);
   }
 
   const inputCls =
@@ -80,17 +84,17 @@ export default function ProductForm({
         <div className="sm:col-span-2 lg:col-span-3">
           <Field label="Image">
             <div className="flex items-center gap-3">
-              {img === PLACEHOLDER_IMG ? (
+              {imagePreview === PLACEHOLDER_IMG ? (
                 <div className="flex size-14 shrink-0 items-center justify-center rounded-md border border-border bg-muted text-muted-foreground">
                   <ImageOff className="size-5" />
                 </div>
               ) : (
                 <Image
-                  src={img}
+                  src={imagePreview}
                   alt="Product image preview"
                   width={56}
                   height={56}
-                  unoptimized={img.startsWith("data:")}
+                  unoptimized={imagePreview.startsWith("blob:") || imagePreview.startsWith("http")}
                   className="size-14 shrink-0 rounded-md border border-border object-cover"
                 />
               )}
@@ -98,7 +102,7 @@ export default function ProductForm({
                 className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-input bg-background px-3 py-2 text-sm font-medium transition-colors duration-150 hover:bg-muted"
               >
                 <Upload className="size-4" />
-                {img === PLACEHOLDER_IMG ? "Upload image" : "Replace image"}
+                {imagePreview === PLACEHOLDER_IMG ? "Upload image" : "Replace image"}
                 <input
                   type="file"
                   accept="image/*"
@@ -106,10 +110,13 @@ export default function ProductForm({
                   className="sr-only"
                 />
               </label>
-              {img !== PLACEHOLDER_IMG && (
+              {imagePreview !== PLACEHOLDER_IMG && (
                 <button
                   type="button"
-                  onClick={() => setImg(PLACEHOLDER_IMG)}
+                  onClick={() => {
+                    setImageFile(null);
+                    setImagePreview(PLACEHORN_IMG => PLACEHOLDER_IMG);
+                  }}
                   className="inline-flex cursor-pointer items-center gap-1 text-sm text-muted-foreground transition-colors duration-150 hover:text-destructive"
                 >
                   <X className="size-4" />
@@ -117,7 +124,7 @@ export default function ProductForm({
                 </button>
               )}
               <span className="hidden text-xs text-muted-foreground sm:block">
-                Stored for this session only (UI preview).
+                Uploads directly to Cloudflare R2 storage.
               </span>
             </div>
           </Field>
@@ -130,13 +137,17 @@ export default function ProductForm({
         </div>
 
         <Field label="Category">
-          <select value={cat} onChange={(e) => setCat(e.target.value)} className={`${inputCls} cursor-pointer`}>
-            {EDITABLE_CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
+          <select
+  value={categoryId}
+  onChange={(e) => setCategoryId(e.target.value)}
+  className={`${inputCls} cursor-pointer`}
+>
+  {categories?.map((c) => (
+    <option key={c.id} value={c.id}>
+      {c.name}
+    </option>
+  )) ?? <option value="1">Loading categories...</option>}
+</select>
         </Field>
 
         <Field label="Level">
@@ -219,7 +230,9 @@ export default function ProductForm({
       </div>
 
       <div className="mt-5 flex gap-2 border-t border-border pt-4">
-        <Button type="submit">{initial ? "Save changes" : "Create product"}</Button>
+        <Button type="submit" disabled={submitting}>
+          {submitting ? "Saving..." : initial ? "Save changes" : "Create product"}
+        </Button>
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>

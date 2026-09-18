@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { PRODUCTS } from "@/lib/products";
 import ProductCard from "@/components/product/ProductCard";
 import CraftIndex from "@/components/home/CraftIndex";
 import NewsletterForm from "@/components/forms/NewsletterForm";
+import type { Product } from "@/lib/types";
 
 const FEATURED_IDS = [
   "aurora-diamond-painting",
@@ -11,8 +11,41 @@ const FEATURED_IDS = [
   "festive-bling-box",
 ];
 
-export default function Home() {
-  const featured = PRODUCTS.filter((p) => FEATURED_IDS.includes(p.id));
+const API_BASE = "https://localhost:7227/api";
+const R2_PUBLIC_URL = "https://pub-xxxxxx.r2.dev"; // Apna Cloudflare R2 public domain yahan put karein
+
+async function getFeaturedProducts(): Promise<Product[]> {
+  try {
+    const res = await fetch(`${API_BASE}/Products`, { cache: "no-store" });
+    const json = await res.json();
+    if (json.success && json.data) {
+      const allProducts: Product[] = json.data.map((item: any) => ({
+        id: item.id.toString(),
+        cat: item.category?.name || "Diamond Painting",
+        name: item.name,
+        price: item.price,
+        was: item.wasPrice || null,
+        tag: item.tag || null,
+        blurb: item.blurb || "",
+        makes: item.makes || "",
+        time: item.time || "",
+        level: item.level || "Beginner",
+        includes: item.includes ? item.includes.split(",") : [],
+        img: item.imageUrl ? `${R2_PUBLIC_URL}/${item.imageUrl}` : "/products/placeholder.jpg",
+      }));
+
+      // Filter featured products based on slugs/IDs or fallback to first 4
+      const matched = allProducts.filter((p) => FEATURED_IDS.includes(p.id));
+      return matched.length > 0 ? matched : allProducts.slice(0, 4);
+    }
+  } catch (err) {
+    console.error("Failed to fetch featured products for home:", err);
+  }
+  return [];
+}
+
+export default async function Home() {
+  const featured = await getFeaturedProducts();
 
   return (
     <main>

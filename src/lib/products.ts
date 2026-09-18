@@ -1,7 +1,3 @@
-/* ============================================================
-   THE MANMAL CLUB — bedazzling kit catalogue
-   Prices in PKR. Swap to the .NET API later by replacing this file.
-   ============================================================ */
 import type { Product } from "./types";
 
 export const PRODUCTS: Product[] = [
@@ -120,4 +116,19 @@ export function rs(n: number): string {
 
 export function byId(id: string | undefined | null): Product | undefined {
   return PRODUCTS.find((p) => p.id === id);
+}
+
+export interface Product {
+  id: string;
+  cat: string;
+  name: string;
+  price: number;
+  was: number | null;
+  tag: string | null;
+  blurb: string;
+  makes: string;
+  time: string;
+  level: string;
+  includes: string[];
+  img: string;
 }

@@ -14,7 +14,7 @@ export default function AdminEditProductPage({
 }) {
   const { id } = use(params);
   const router = useRouter();
-  const { products, updateProduct } = useAdminData();
+  const { products, categories, updateProduct } = useAdminData();
   const product = products.find((p) => p.id === id);
 
   if (!product) {
@@ -23,7 +23,7 @@ export default function AdminEditProductPage({
         <PackageSearch className="mx-auto size-8 text-muted-foreground" />
         <h1 className="mt-3 text-lg font-semibold">Product not found</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          No product with id “{id}” in this preview session.
+          No product with id “{id}” in database.
         </p>
         <Link
           href="/admin/products"
@@ -34,6 +34,15 @@ export default function AdminEditProductPage({
         </Link>
       </div>
     );
+  }
+
+  async function handleSave(formData: FormData) {
+    const success = await updateProduct(product!.id, formData);
+    if (success) {
+      router.push("/admin/products");
+    } else {
+      alert("Failed to update product.");
+    }
   }
 
   return (
@@ -54,10 +63,8 @@ export default function AdminEditProductPage({
       <div className="mt-4">
         <ProductForm
           initial={product}
-          onSave={(p) => {
-            updateProduct(p);
-            router.push("/admin/products");
-          }}
+          categories={categories}
+          onSave={handleSave}
           onCancel={() => router.push("/admin/products")}
         />
       </div>
